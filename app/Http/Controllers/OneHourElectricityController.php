@@ -8,8 +8,15 @@ use Validator;
 use App\Models\OneHourElectricity;
 use App\Models\Panel;
 
+use App\Repositories\OneHourElectricityInterface as OneHourElectricityInterface;
+
 class OneHourElectricityController extends Controller
 {
+    public function __construct(OneHourElectricityInterface $OneHourElectricity)
+    {
+        $this->OneHourElectricity = $OneHourElectricity;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +25,9 @@ class OneHourElectricityController extends Controller
     public function index(Request $request)
     {
         $panel = Panel::where('serial', $request->panel_serial)->firstOrFail();
-        return OneHourElectricity::where('panel_id', $panel->id)->get();
+        //return OneHourElectricity::where('panel_id', $panel->id)->get();
+        return $this->OneHourElectricity->find($panel->id);
+
     }
 
     /**
