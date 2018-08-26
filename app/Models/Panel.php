@@ -9,7 +9,7 @@ class Panel extends Model
     protected $fillable = ['serial', 'longitude', 'latitude'];
 
     public static $fieldValidations = [
-        'serial'    => 'required|unique:panels|size:15',
+        'serial'    => 'required|unique:panels|size:16',
         'latitude'  => 'required|between:-90,90'
     ];
 
